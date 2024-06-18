@@ -4,6 +4,7 @@ import shapes.*;
 import utilities.ShapeComparator;
 
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class AppDriver
 {
@@ -30,7 +31,11 @@ public class AppDriver
 		// refer to demo03 OfficeManager.java on how to create specific
 		// objects using reflection from a String
 
-		String compareType = "v";
+		//creates a scanner to get an user input for the compareType variable
+		Scanner scanner = new Scanner(System.in);
+
+		System.out.println("Enter compare type (h for height, v for volume, a for base area): ");
+		String compareType = scanner.nextLine();
 
 
 		Shape cone = new Cone(10, 5);
