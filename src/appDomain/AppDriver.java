@@ -2,6 +2,7 @@ package appDomain;
 
 import shapes.*;
 import utilities.ShapeComparator;
+import utilities.ShapeReader;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -38,21 +39,21 @@ public class AppDriver
 		String compareType = scanner.nextLine();
 
 
-		Shape cone = new Cone(10, 5);
-		Shape cylinder = new Cylinder(10, 5);
-		Shape pyramid = new Pyramid(10, 5);
-		Shape squarePrism = new SquarePrism(10, 5);
-		Shape triangularPrism = new TriangularPrism(10, 5);
-		Shape pentagonalPrism = new PentagonalPrism(10, 5);
-		Shape octagonalPrism = new OctagonalPrism(10, 5);
-
-		System.out.println("Cone Volume: " + cone.calcVolume());
-		System.out.println("Cylinder Volume: " + cylinder.calcVolume());
-		System.out.println("Pyramid Volume: " + pyramid.calcVolume());
-		System.out.println("Square Prism Volume: " + squarePrism.calcVolume());
-		System.out.println("Triangular Prism Volume: " + triangularPrism.calcVolume());
-		System.out.println("Pentagonal Prism Volume: " + pentagonalPrism.calcVolume());
-		System.out.println("Octagonal Prism Volume: " + octagonalPrism.calcVolume());
+//		Shape cone = new Cone(10, 5);
+//		Shape cylinder = new Cylinder(10, 5);
+//		Shape pyramid = new Pyramid(10, 5);
+//		Shape squarePrism = new SquarePrism(10, 5);
+//		Shape triangularPrism = new TriangularPrism(10, 5);
+//		Shape pentagonalPrism = new PentagonalPrism(10, 5);
+//		Shape octagonalPrism = new OctagonalPrism(10, 5);
+//
+//		System.out.println("Cone Volume: " + cone.calcVolume());
+//		System.out.println("Cylinder Volume: " + cylinder.calcVolume());
+//		System.out.println("Pyramid Volume: " + pyramid.calcVolume());
+//		System.out.println("Square Prism Volume: " + squarePrism.calcVolume());
+//		System.out.println("Triangular Prism Volume: " + triangularPrism.calcVolume());
+//		System.out.println("Pentagonal Prism Volume: " + pentagonalPrism.calcVolume());
+//		System.out.println("Octagonal Prism Volume: " + octagonalPrism.calcVolume());
 
 		System.out.println("\n \n Comparator \n\n");
 
@@ -70,22 +71,19 @@ public class AppDriver
 
 		Arrays.sort(shapes, shapeComparator);
 
-		for (Shape shape : shapes) {
+//		for (Shape shape : shapes) {
+//			System.out.println(shape.getClass().getSimpleName() + " Base Area: " + shape.calcBaseArea() + " Volume: " + shape.calcVolume());
+//		}
+
+		ShapeReader SR = new ShapeReader();
+
+		Shape [] shapes1 = ShapeReader.readShapesFromFile("res/shapes2.txt");
+
+		Arrays.sort(shapes1, shapeComparator);
+
+		for (Shape shape : shapes1) {
 			System.out.println(shape.getClass().getSimpleName() + " Base Area: " + shape.calcBaseArea() + " Volume: " + shape.calcVolume());
 		}
-
-
-	}
-
-	private static String parseArguments(String[] args) {
-		if (args.length != 2 || !args[0].equals("-t")) {
-			throw new IllegalArgumentException("Usage: java Main -t [h|v|a]");
-		}
-		String compareType = args[1];
-		if (!compareType.equals("h") && !compareType.equals("v") && !compareType.equals("a")) {
-			throw new IllegalArgumentException("Invalid compare type: " + compareType);
-		}
-		return compareType;
 	}
 
 }
