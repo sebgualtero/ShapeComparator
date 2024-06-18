@@ -5,6 +5,7 @@ import utilities.ShapeComparator;
 import utilities.ShapeReader;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class AppDriver
@@ -33,10 +34,18 @@ public class AppDriver
 		// objects using reflection from a String
 
 		//creates a scanner to get an user input for the compareType variable
-		Scanner scanner = new Scanner(System.in);
+//		Scanner scanner = new Scanner(System.in);
+//
+//		System.out.println("Enter compare type (h for height, v for volume, a for base area): ");
+//		String compareType = scanner.nextLine();
 
-		System.out.println("Enter compare type (h for height, v for volume, a for base area): ");
-		String compareType = scanner.nextLine();
+		String compareType = parseArguments(args)[0];
+		String filename = parseArguments(args)[1];
+		String algorithm = parseArguments(args)[2];
+
+		System.out.println(compareType);
+		System.out.println(filename);
+		System.out.println(algorithm);
 
 
 //		Shape cone = new Cone(10, 5);
@@ -56,7 +65,6 @@ public class AppDriver
 //		System.out.println("Octagonal Prism Volume: " + octagonalPrism.calcVolume());
 
 		System.out.println("\n \nComparator \n\n");
-		System.out.println("\n \nJeff Code here \n\n");
 
 		Shape[] shapes = {
 				new Cone(10, 5),
@@ -68,6 +76,8 @@ public class AppDriver
 				new OctagonalPrism(10, 5)
 		};
 
+
+
 		ShapeComparator shapeComparator = new ShapeComparator(compareType);
 
 		Arrays.sort(shapes, shapeComparator);
@@ -78,13 +88,43 @@ public class AppDriver
 
 		ShapeReader SR = new ShapeReader();
 
-		Shape [] shapes1 = ShapeReader.readShapesFromFile("res/shapes2.txt");
+		//Shape [] shapes1 = ShapeReader.readShapesFromFile("res/shapes2.txt");
+		Shape [] shapes1 = ShapeReader.readShapesFromFile(filename);
 
-		Arrays.sort(shapes1, shapeComparator);
+
+		//Arrays.sort(shapes1, shapeComparator);
+
+		Arrays.sort(shapes1, Collections.reverseOrder(shapeComparator));
 
 		for (Shape shape : shapes1) {
 			System.out.println(shape.getClass().getSimpleName() + " Base Area: " + shape.calcBaseArea() + " Volume: " + shape.calcVolume());
 		}
 	}
+
+	private static String[] parseArguments(String[] args) {
+
+        if (args.length != 3) {
+            throw new IllegalArgumentException("Usage: java Main -t[h|v|a] -f[filename] -s[type of sorting algorithm]");
+        }
+
+        String compareType = null;
+		String filename = null;
+		String algorithm = null;
+
+        for (int i = 0; i < args.length; i++) {
+			args[i] = args[i].toLowerCase();
+            if (args[i].startsWith("-t")) {
+                compareType = args[i].substring(2);
+            } else if (args[i].startsWith("-f")) {
+                filename = args[i].substring(2);
+            } else if (args[i].startsWith("-s")) {
+                algorithm = args[i].substring(2);
+            } else {
+                throw new IllegalArgumentException("Invalid argument: " + args[i]);
+            }
+
+        }
+        return new String[]{compareType, filename, algorithm};
+    }
 
 }
