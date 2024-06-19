@@ -8,7 +8,7 @@ public class TriangularPrism extends Prism
 
     @Override
     public double calcVolume() {
-        return calcBaseArea() * height;
+        return calcBaseArea() * getHeight();
     }
 
     @Override
