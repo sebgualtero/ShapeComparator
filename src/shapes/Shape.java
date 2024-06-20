@@ -15,6 +15,11 @@ public abstract class Shape {
 
     public abstract double calcBaseArea();
 
+    public double getPropertyValue(String compareType) {
+        if (compareType.equals("a")) return calcBaseArea();
+        else if (compareType.equals("v")) return calcVolume();
+        else return getHeight();
+    }
 }
 
 

@@ -2,8 +2,6 @@ package utilities;
 
 import shapes.Shape;
 
-import java.util.Comparator;
-
 
 public class AreaComparator implements ShapeComp {
 
@@ -17,4 +15,5 @@ public class AreaComparator implements ShapeComp {
             return 0;
 
     }
+
 }
