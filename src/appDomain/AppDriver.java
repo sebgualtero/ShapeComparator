@@ -11,28 +11,14 @@ public class AppDriver
 	{
 		// TODO Auto-generated method stub
 
-		//check and document
-
-		// refer to demo001 BasicFileIO.java for a simple example on how to
-		// read data from a text file
-
-		// refer to demo01 Test.java for an example on how to parse command
-		// line arguments and benchmarking tests
-
-		// refer to demo02 Student.java for comparable implementation, and
-		// NameCompare.java or GradeCompare for comparator implementations
-
-		// refer to demo02 KittySort.java on how to use a custom sorting
-		// algorithm on a list of comparables to sort using either the
-		// natural order (comparable) or other orders (comparators)
-
-		// refer to demo03 OfficeManager.java on how to create specific
-		// objects using reflection from a String
-
-
 		String compareType = parseArguments(args)[0];
 		String filename = parseArguments(args)[1];
 		String algorithm = parseArguments(args)[2];
+
+		long startTime = 0;
+		long endTime = 0;
+
+		String algoName = "";
 
 		System.out.println(compareType);
 		System.out.println(filename);
@@ -43,13 +29,55 @@ public class AppDriver
 		Shape [] shapes1 = ShapeReader.readShapesFromFile(filename);
 
 		Sorter sorter = new Sorter<>(shapes1, compareType);
-
-		sorter.quickSort();
-
-		for (Shape shape : sorter.getData()) {
-			System.out.println(shape.getClass().getSimpleName() + "\tBase Area: " + shape.calcBaseArea() + "\tVolume: " + shape.calcVolume() + "\t Heigth: " + shape.getHeight());
-
+		switch (algorithm){
+			case "b": {
+				startTime = System.currentTimeMillis();
+				sorter.bubbleSort();
+				endTime = System.currentTimeMillis();
+				algoName = "Bubble Sort";
+			} break;
+			case "i": {
+				startTime = System.currentTimeMillis();
+				sorter.insertionSort();
+				endTime = System.currentTimeMillis();
+				algoName = "Insertion Sort";
+			} break;
+			case "s": {
+				startTime = System.currentTimeMillis();
+				sorter.selectionSort();
+				endTime = System.currentTimeMillis();
+				algoName = "Selection Sort";
+			} break;
+			case "m": {
+				startTime = System.currentTimeMillis();
+				sorter.mergeSort();
+				endTime = System.currentTimeMillis();
+				algoName = "Merge Sort";
+			} break;
+			case "q": {
+				startTime = System.currentTimeMillis();
+				sorter.quickSort();
+				endTime = System.currentTimeMillis();
+				algoName = "Quick Sort";
+			} break;
+			case "c":{
+				startTime = System.currentTimeMillis();
+				sorter.countingSort();
+				endTime = System.currentTimeMillis();
+				algoName = "Counting Sort";
+			} break;
 		}
+
+		System.out.println(shapes1[0].getClass().getSimpleName()+ "\tBase Area: " + shapes1[0].calcBaseArea() + "\tVolume: " + shapes1[0].calcVolume() + "\t Heigth: " + shapes1[0].getHeight());
+		for (int j = 1000;  j < shapes1.length; j +=1000){
+			System.out.println(shapes1[j].getClass().getSimpleName()+ "\tBase Area: " + shapes1[j].calcBaseArea() + "\tVolume: " + shapes1[j].calcVolume() + "\t Heigth: " + shapes1[j].getHeight());
+		}
+		System.out.println(shapes1[shapes1.length-1].getClass().getSimpleName()+ "\tBase Area: " + shapes1[shapes1.length-1].calcBaseArea() + "\tVolume: " + shapes1[shapes1.length-1].calcVolume() + "\t Heigth: " + shapes1[shapes1.length-1	].getHeight());
+
+		//total time to run algorithm
+		System.out.println("Time to run sorting using " + algoName +"= " + (endTime - startTime) + " Miliseconds");
+
+
 	}
 
 	private static String[] parseArguments(String[] args) {

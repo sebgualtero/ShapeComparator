@@ -31,7 +31,7 @@ public class Sorter<T extends Shape> {
             int minIndex = i;
 
             for (int j = i + 1; j < data.length; j++) {
-                if (comparator.compare(min, data[j]) > 0) {
+                if (comparator.compare(min, data[j]) < 0) {
                     min = data[j];
                     minIndex = j;
                 }
@@ -58,7 +58,7 @@ public class Sorter<T extends Shape> {
             for (int j = 0; j < n - 1 - i; j++) {
 
 
-                if (comparator.compare(data[j], data[j + 1]) > 0) {
+                if (comparator.compare(data[j], data[j + 1]) < 0) {
                     // Swap array[j] and array[j + 1]
                     T temp = data[j];
                     data[j] = data[j + 1];
@@ -75,7 +75,7 @@ public class Sorter<T extends Shape> {
             int j = i - 1;
 
             // Move elements of array[0..i-1], that are greater than key, to one position ahead of their current position
-            while (j >= 0 && comparator.compare(key, data[j]) < 0) {
+            while (j >= 0 && comparator.compare(key, data[j]) > 0) {
                 data[j + 1] = data[j];
                 j = j - 1;
             }
@@ -99,7 +99,7 @@ public class Sorter<T extends Shape> {
         T pivot = data[high];
         int i = (low - 1);
         for (int j = low; j < high; j++) {
-            if (comparator.compare(data[j], pivot) <= 0) {
+            if (comparator.compare(data[j], pivot) >= 0) {
                 i++;
                 swap(i, j);
             }
@@ -136,7 +136,7 @@ public class Sorter<T extends Shape> {
         int i = 0, j = 0;
         int k = left;
         while (i < n1 && j < n2) {
-            if (comparator.compare((T) L[i], (T) R[j]) <= 0) {
+            if (comparator.compare((T) L[i], (T) R[j]) >= 0) {
                 data[k] = (T) L[i];
                 i++;
             } else {
