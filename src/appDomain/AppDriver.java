@@ -44,7 +44,7 @@ public class AppDriver
 
 		Sorter sorter = new Sorter<>(shapes1, compareType);
 
-		sorter.countingSort();
+		sorter.quickSort();
 
 		for (Shape shape : sorter.getData()) {
 			System.out.println(shape.getClass().getSimpleName() + "\tBase Area: " + shape.calcBaseArea() + "\tVolume: " + shape.calcVolume() + "\t Heigth: " + shape.getHeight());
