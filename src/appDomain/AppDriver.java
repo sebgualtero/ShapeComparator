@@ -24,7 +24,7 @@ public class AppDriver
 		System.out.println(filename);
 		System.out.println(algorithm);
 
-		System.out.println("\n \nComparator \n\n");
+		System.out.println("\n \nSorter \n\n");
 
 		Shape [] shapes1 = ShapeReader.readShapesFromFile(filename);
 
@@ -60,12 +60,15 @@ public class AppDriver
 				endTime = System.currentTimeMillis();
 				algoName = "Quick Sort";
 			} break;
-			case "c":{
+			case "z":{
 				startTime = System.currentTimeMillis();
-				sorter.countingSort();
+				sorter.gnomeSort();
 				endTime = System.currentTimeMillis();
-				algoName = "Counting Sort";
+				algoName = "Gnome Sort";
 			} break;
+			default:{
+				throw new IllegalArgumentException("Chosen algorithm " + algorithm + " not available, please use [b], [s], [m], [q], [c] or [z]");
+			}
 		}
 
 		System.out.println(shapes1[0].getClass().getSimpleName()+ "\tBase Area: " + shapes1[0].calcBaseArea() + "\tVolume: " + shapes1[0].calcVolume() + "\t Heigth: " + shapes1[0].getHeight());
@@ -75,8 +78,8 @@ public class AppDriver
 		System.out.println(shapes1[shapes1.length-1].getClass().getSimpleName()+ "\tBase Area: " + shapes1[shapes1.length-1].calcBaseArea() + "\tVolume: " + shapes1[shapes1.length-1].calcVolume() + "\t Heigth: " + shapes1[shapes1.length-1	].getHeight());
 
 		//total time to run algorithm
-		System.out.println("Time to run sorting using " + algoName +"= " + (endTime - startTime) + " Miliseconds");
-
+		System.out.println("\n \nTime to run " + algoName + " = " + (endTime - startTime) + " Miliseconds");
+		System.out.println("Items sorted: " + shapes1.length);
 
 	}
 
@@ -99,7 +102,8 @@ public class AppDriver
             } else if (args[i].startsWith("-s")) {
                 algorithm = args[i].substring(2);
             } else {
-                throw new IllegalArgumentException("Invalid argument: " + args[i]);
+                throw new IllegalArgumentException("Invalid argument: " + args[i] +
+						"\nUsage: java Main -t[h|v|a] -f[filename] -s[type of sorting algorithm]");
             }
 
         }

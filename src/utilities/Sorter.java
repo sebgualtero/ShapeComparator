@@ -159,57 +159,26 @@ public class Sorter<T extends Shape> {
         }
     }
 
-    public void countingSort() {
+    public void gnomeSort()
+    {
         int n = data.length;
+        int index = 0;
 
-        // Determine the range of the data
-        double min = Double.MAX_VALUE;
-        double max = Double.MIN_VALUE;
-        for (T shape : data) {
-            double value = shape.getPropertyValue(compareType);
-            if (value > max) max = value;
-            if (value < min) min = value;
+        while (index < n) {
+            if (index == 0)
+                index++;
+            if (comparator.compare(data[index], data[index - 1]) < 0) {
+                index++;
+            }
+            else {
+
+                T temp = data[index];
+                data[index] = data[index - 1];
+                data[index - 1] = temp;
+                index--;
+            }
         }
-
-        // Scaling factor to preserve decimal places
-        int scaleFactor = 100000000;
-
-        // Adjust values to be positive integers within the appropriate range
-        int adjustedMin = (int) (min * scaleFactor);
-        int adjustedMax = (int) (max * scaleFactor);
-        int range = adjustedMax - adjustedMin + 1;
-
-        // Create a count array with the range
-        int[] countArray = new int[range];
-
-        // Initialize count array
-        for (int i = 0; i < countArray.length; i++) {
-            countArray[i] = 0;
-        }
-
-        // Store count of occurrences in count[]
-        for (int i = 0; i < n; i++) {
-            int index = (int) (data[i].getPropertyValue(compareType) * scaleFactor) - adjustedMin;
-            countArray[index]++;
-        }
-
-        // Change count[i] so that count[i] now contains actual position of this value in output[]
-        for (int i = 1; i < countArray.length; i++) {
-            countArray[i] += countArray[i - 1];
-        }
-
-        // Build the output array
-        T[] output = (T[]) new Shape[n];
-        for (int i = n - 1; i >= 0; i--) {
-            int index = (int) (data[i].getPropertyValue(compareType) * scaleFactor) - adjustedMin;
-            output[countArray[index] - 1] = data[i];
-            countArray[index]--;
-        }
-
-        // Copy the output array to data[], so that data[] now contains sorted numbers
-        for (int i = 0; i < n; i++) {
-            data[i] = output[i];
-        }
+        return;
     }
 
 }
