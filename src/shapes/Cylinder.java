@@ -3,7 +3,11 @@ package shapes;
 public class Cylinder extends Shape
 {
     double radius;
-
+    /**
+     * 
+     * @param height inherited from the abstract class called shape
+     * @param radius the class given radius
+     */
     public Cylinder(double height, double radius) {
         super(height);
         this.radius = radius;
