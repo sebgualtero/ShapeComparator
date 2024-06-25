@@ -5,8 +5,8 @@ public class Cone extends Shape {
     double radius;
     /**
      * 
-     * @param height inherited from the abstract class called shape
-     * @param radius cone's given radius
+     * @param height inherited from the abstract class called shape.
+     * @param radius cone's given radius.
      */
     public Cone(double height, double radius) {
         super(height);
