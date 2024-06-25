@@ -10,7 +10,9 @@ public class AppDriver
 	public static void main( String[] args )
 	{
 		// TODO Auto-generated method stub
-
+                /**
+                 * 
+                 */
 		String compareType = parseArguments(args)[0];
 		String filename = parseArguments(args)[1];
 		String algorithm = parseArguments(args)[2];
@@ -70,7 +72,11 @@ public class AppDriver
 				throw new IllegalArgumentException("Chosen algorithm " + algorithm + " not available, please use [b], [s], [m], [q], [c] or [z]");
 			}
 		}
-
+                /**
+                 * @author - Jeffry
+                 * Prints out the first sorted output then prints out the 1000th sorted item from the list of items collected
+                 * length-1 means since we started with 1, the next print out is 1001, the -1 makes sure that the 1000th line is printed out
+                 */
 		System.out.println(shapes1[0].getClass().getSimpleName()+ "\tBase Area: " + shapes1[0].calcBaseArea() + "\tVolume: " + shapes1[0].calcVolume() + "\t Heigth: " + shapes1[0].getHeight());
 		for (int j = 1000;  j < shapes1.length; j +=1000){
 			System.out.println(shapes1[j].getClass().getSimpleName()+ "\tBase Area: " + shapes1[j].calcBaseArea() + "\tVolume: " + shapes1[j].calcVolume() + "\t Heigth: " + shapes1[j].getHeight());
@@ -88,10 +94,17 @@ public class AppDriver
         if (args.length != 3) {
             throw new IllegalArgumentException("Usage: java Main -t[h|v|a] -f[filename] -s[type of sorting algorithm]");
         }
-
+        
+        /**
+         * @author - Jeffry
+         * initializes compareType, filename and algorithm to null so it is ready for processing
+         * args[i] = args[i].toLowerCase(); - converts the input to lowercase once entered / added to the custom config run
+         * uses the prefixes to determine what type of sorting algorithm to be used and which file to process 
+         * depending on the entered sets of string in command prompt
+         */
         String compareType = null;
-		String filename = null;
-		String algorithm = null;
+	String filename = null;
+	String algorithm = null;
 
         for (int i = 0; i < args.length; i++) {
 			args[i] = args[i].toLowerCase();
