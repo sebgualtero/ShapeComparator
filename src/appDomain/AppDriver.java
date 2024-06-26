@@ -3,7 +3,10 @@ package appDomain;
 import shapes.*;
 import utilities.ShapeReader;
 import utilities.Sorter;
-
+/**
+ * The main application driver class.
+ * @author sukhd
+ */
 public class AppDriver
 {
 
@@ -11,7 +14,7 @@ public class AppDriver
 	{
 		// TODO Auto-generated method stub
                 /**
-                 * 
+                 * parse command-line arguements
                  */
 		String compareType = parseArguments(args)[0];
 		String filename = parseArguments(args)[1];
@@ -28,10 +31,14 @@ public class AppDriver
 
 		System.out.println("\n \nSorter \n\n");
 
+                //reads shapes from file
 		Shape [] shapes1 = ShapeReader.readShapesFromFile(filename);
-
+                
+                //creates a sorter instance
 		Sorter sorter = new Sorter<>(shapes1, compareType);
-		switch (algorithm){
+		
+                //Performs sorting based on the chosenn algorithm
+                switch (algorithm){
 			case "b": {
 				startTime = System.currentTimeMillis();
 				sorter.bubbleSort();
@@ -88,7 +95,12 @@ public class AppDriver
 		System.out.println("Items sorted: " + shapes1.length);
 
 	}
-
+        
+        /**
+         * Parses the command-line arguments.
+         * @param args the command-line arguments
+         * @return an array of parsed arguments
+         */
 	private static String[] parseArguments(String[] args) {
 
         if (args.length != 3) {
