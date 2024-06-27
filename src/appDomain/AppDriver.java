@@ -1,3 +1,9 @@
+/* *************************************************************************  
+** Program Name:  CPRG 304-E                                              **  
+** Group No: 4                                                            **
+** Members: Juan Sabastian, Jeffry Ancheta, Navjot Singh, Sukhdeep Singh **
+************************************************************************* */
+
 package appDomain;
 
 import shapes.*;

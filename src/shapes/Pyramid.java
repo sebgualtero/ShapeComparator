@@ -14,6 +14,7 @@ public class Pyramid extends Shape
      * @param side the side length of the pyramid's base.
      */
     public Pyramid(double height, double side) {
+        //inherited height from the Shape class
         super(height);
         this.side = side;
     }
